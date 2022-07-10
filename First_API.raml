@@ -1,0 +1,121 @@
+#%RAML 1.0
+title:  Personal Details
+version: 1
+baseUri: http://server//api{version}
+
+/my-resouce:
+  /sub-resource{ID}:
+  /{searchFilter}:
+  get:
+    queryParameters:
+      Name:
+        displayName: Your Name
+        type: string
+        description: Your Full Name
+        example: Hitesh Jha
+        required: False
+
+      DOB:
+        displayName: Your DOB
+        type: number
+        description:  Your Date of Birth
+        example: 2003
+        required: true
+
+      Gender:
+        displayName: Your Gender
+        type : string
+        description: Enter your Gender
+        example: Male
+        required: True
+
+      Bio:
+        displayName: Your Bio
+        type: string
+        description:  Enter your details 
+        example: I'm XYZ doing Degree from this and that University
+        required: True
+
+    responses:
+        200:
+
+
+  post:
+    description: This is my new Post  method 
+    
+/sub-resource:
+  get:
+    queryParameters:
+      Info:
+        displayName: Child Resource
+        type : string
+        description: This is my sub- resource
+
+
+resourceTypes:
+  resourceTypes:
+    - collection:
+        description: ' Collection of available'
+  <<resourcePathName>>
+      get:
+        description: Get a list of <<resourcePathName>>.
+        responses:
+          200:
+            body:
+              application/json:
+                example:|
+                    <<exampleGetResponse>>
+          301:
+            headers:
+              location:
+                type : string
+                example: |
+                  <<exampleGetRedirect>>
+          400:
+/my-resource:
+  type:
+    collection:
+      exampleGetResponse: |
+        {
+          "name" : "Hitesh Jha"
+          "DOB" : "2003"
+          "Author" : true
+        }
+      exampleGetRedirect: |
+           http://api.mydomain.com/Users/846
+
+/resource-two:
+  type:
+    Collection:
+      exampleGetResponse: |
+        {
+
+          "City" : "Hitesh Jha"
+          "state" : "Maharashtra"
+          "Postal" : "411031"
+
+        }
+      exampleGetRedirect : |
+          http://api.mydomain.com/locations/78
+
+
+
+traits:
+  - searchable:
+       queryParameters:
+         query:
+           description: |
+             JSON array
+             [{"field1","value1","operator1"},…]	
+             <<description>>
+
+          example: |
+          <<example>>
+
+/my-resource:
+    get:
+    is:	 [searchable:	 {description:	 "search	 by	 location	
+    name",	example:	"[\"city\"\,\"San	Fran\",\"like\"]"}
+
+    
+
