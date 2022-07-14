@@ -1,0 +1,12 @@
+securitySchemes:
+		- oauth_1_0:
+type:	OAuth	1.0
+						settings:
+								requestTokenUri:	
+https://api.twitter.com/oauth/request_token
+								authorizationUri:	
+https://api.twitter.com/oauth/authorize
+71
+								tokenCredentialsUri:	
+https://api.twitter.com/oauth/access_token
+securedBy:	[	oauth_1_0	]
